@@ -1,9 +1,9 @@
 
 <div class="fruitlist_content">
-    @for(item of fruitlist; track item.name){
+    @for(item of fruitlist; track item.name) {
         <section class="singleFruitBox">
             <div>
-                @if (item.stars < 3){
+                @if (item.stars < 3) {
 				<img src="./assets/img/fruits/{{item.img}}" alt="" srcset="">
 				}
             </div>
@@ -13,17 +13,21 @@
                     <p><b>Bewertung:</b></p>
                     <div>
 					
-					@for(count of [1,2,3,4,5]; track fruitlist){
-						@if(item.stars >= count){ <img src="./assets/img/stars/star.svg" alt="" srcset="">
-					
-						}
+					@for (count of [1, 2, 3, 4, 5]; track fruitlist) {
+				@switch (true) {
+				@case (item.stars >= count): {
+				<img src="./assets/img/stars/star.svg" alt="" srcset="">
+				}
+				@break
 
-						@elseif(item.stars >= count - 0.5){ <img src="./assets/img/stars/star-half.svg" alt="" srcset="">
+				@case (item.stars >= count - 0.5): {
+				<img src="./assets/img/stars/star-half.svg" alt="" srcset="">
+				}
+				@break
 
-						}
-						@else(item.stars >= count){ <img src="./assets/img/stars/star-empty.svg" alt="" srcset="">
-
-						}
+				@default: {
+				<img src="./assets/img/stars/star-empty.svg" alt="" srcset="">
+				}
 					}
 						
                         <p>({{item.stars}})</p>
